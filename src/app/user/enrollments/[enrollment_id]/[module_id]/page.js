@@ -21,9 +21,10 @@ export default function Page() {
 
     const response = await services.enrollments.show({ id: params.enrollment_id });
     if (response?.data) {
-      const module = response?.data?.course?.modules.find((mod) => mod.id == params.module_id);
-      setLessons(module.lessons);
+      const lessons = await services.lessons.index({ params: { module_id: params.module_id } });
+      if (lessons?.data) setLessons(lessons?.data);
     }
+
     setIsLoading(false);
   };
 
@@ -35,26 +36,16 @@ export default function Page() {
     <Screen>
       <Grid title="Lecciones" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
         {lessons.map((lesson, index) => {
-          const minutes = lesson.duration_seconds / 60;
-          const resources = lesson.resources.length;
-
-          const tags = [
-            { icon: <Clock />, text: `${minutes} minutos` },
-            { icon: <Book />, text: `${resources} recursos` },
-          ];
-
           let isLocked = false;
-          if (index > 0 && !lessons[index - 1].progress) isLocked = true;
 
           return (
             <Item
-              key={lesson.id}
+              key={index}
               src={lesson?.image}
               title={lesson?.name}
               description={lesson?.description}
-              tags={tags}
               isLocked={isLocked}
-              progress={lesson.progress ? 100 : 0}
+              //progress={lesson.progress ? 100 : 0}
               onPress={() => router.push(`${pathname}/${lesson.id}`)}
             />
           );

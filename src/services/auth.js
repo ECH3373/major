@@ -3,7 +3,7 @@ import { interceptors } from '@/interceptors';
 import Cookies from 'js-cookie';
 
 const login = async ({ username } = {}) => {
-  const response = await interceptors.gateway.post(`${config.api.gateway}/login`, {
+  const response = await interceptors.gateway.post(`${config.api.gateway}/auth/login`, {
     username,
     password: config.app.id,
   });

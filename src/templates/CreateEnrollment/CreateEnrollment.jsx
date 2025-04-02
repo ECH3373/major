@@ -24,7 +24,7 @@ export const CreateEnrollment = ({ onSubmit }) => {
 
   const create = async () => {
     const response = await services.enrollments.store({ employee_id: employee, course_id: course });
-    if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
+    if (response?.status == 'error') addToast({ title: 'Error', description: response?.error, color: 'danger' });
 
     if (response?.status == 'success') {
       if (onSubmit) onSubmit(response);

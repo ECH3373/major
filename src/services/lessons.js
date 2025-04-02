@@ -2,14 +2,14 @@ import { config } from '@/config';
 import { interceptors } from '@/interceptors';
 
 const index = async ({ params = {} } = {}) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/lessons`, {
+  const response = await interceptors.gateway.get(`${config.api.gateway}/major/lessons`, {
     params,
   });
   return response;
 };
 
 const show = async ({ id }) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/lessons/${id}`);
+  const response = await interceptors.gateway.get(`${config.api.gateway}/major/lessons/${id}`);
   return response;
 };
 
@@ -19,7 +19,7 @@ const store = async ({ name, description, image, module_id, file, duration_secon
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -27,7 +27,7 @@ const store = async ({ name, description, image, module_id, file, duration_secon
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.post(`${config.api.gateway}/lessons`, {
+  const response = await interceptors.gateway.post(`${config.api.gateway}/major/lessons`, {
     name,
     description,
     image,
@@ -46,7 +46,7 @@ const update = async ({ id, name, description, image, file, duration_seconds, or
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -54,7 +54,7 @@ const update = async ({ id, name, description, image, file, duration_seconds, or
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.patch(`${config.api.gateway}/lessons/${id}`, {
+  const response = await interceptors.gateway.patch(`${config.api.gateway}/major/lessons/${id}`, {
     name,
     description,
     image,
@@ -67,7 +67,7 @@ const update = async ({ id, name, description, image, file, duration_seconds, or
 };
 
 const destroy = async ({ id } = {}) => {
-  const response = await interceptors.gateway.delete(`${config.api.gateway}/lessons/${id}`);
+  const response = await interceptors.gateway.delete(`${config.api.gateway}/major/lessons/${id}`);
   return response;
 };
 

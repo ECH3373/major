@@ -1,4 +1,4 @@
 export const app = {
-  id: '67e6d0a861585160a5af29c4',
+  id: 'e2891e34-8afd-4334-9723-1d51ff387af9',
   name: 'MAJOR',
 };

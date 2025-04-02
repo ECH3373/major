@@ -19,8 +19,16 @@ export default function Page() {
   const get = async () => {
     setIsLoading(true);
 
-    const response = await services.enrollments.show({ id: params.enrollment_id });
-    if (response?.data) setModules(response?.data?.course?.modules);
+    const enrollment = await services.enrollments.show({ id: params.enrollment_id });
+    if (enrollment?.data) {
+      const course = await services.courses.show({ id: enrollment?.data?.course?.id });
+
+      if (course?.data) {
+        const modules = await services.modules.index({ params: { course_id: course.data.id } });
+        if (modules?.data) setModules(modules.data);
+      }
+    }
+
     setIsLoading(false);
   };
 
@@ -32,34 +40,26 @@ export default function Page() {
     <Screen>
       <Grid title="Módulos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
         {modules.map((module, index) => {
-          const lessons = module.lessons.length;
-          const minutes = module.lessons?.reduce((sum, lesson) => sum + (lesson.duration_seconds ?? 0), 0) / 60;
-          const resources = module.lessons?.reduce((sum, lesson) => sum + (lesson.resources?.length ?? 0), 0) || 0;
-          const progress = module.lessons?.reduce((count, lesson) => count + (lesson.progress ? 1 : 0), 0) ?? 0;
-
-          const tags = [
-            { icon: <Book />, text: `${lessons} lecciones` },
-            { icon: <Clock />, text: `${minutes} minutes` },
-            { icon: <Book />, text: `${resources} recursos` },
-          ];
-
+          //const lessons = module.lessons.length;
+          //const progress = module.lessons?.reduce((count, lesson) => count + (lesson.progress ? 1 : 0), 0) ?? 0;
+          //
+          //
           let isLocked = false;
-
-          if (index > 0) {
-            const prev = modules[index - 1];
-            const prevLessons = prev.lessons?.length ?? 0;
-            const prevProgress = prev.lessons?.reduce((c, l) => c + (l.progress ? 1 : 0), 0) ?? 0;
-            isLocked = prevLessons > 0 && (prevProgress * 100) / prevLessons < 100;
-          }
+          //
+          //if (index > 0) {
+          //  const prev = modules[index - 1];
+          //  const prevLessons = prev.lessons?.length ?? 0;
+          //  const prevProgress = prev.lessons?.reduce((c, l) => c + (l.progress ? 1 : 0), 0) ?? 0;
+          //  isLocked = prevLessons > 0 && (prevProgress * 100) / prevLessons < 100;
+          //}
 
           return (
             <Item
-              key={module.id}
+              key={index}
               src={module?.image}
               title={module?.name}
               description={module?.description}
-              tags={tags}
-              progress={(progress * 100) / lessons}
+              //progress={(progress * 100) / lessons}
               isLocked={isLocked}
               onPress={() => router.push(`${pathname}/${module.id}`)}
             />

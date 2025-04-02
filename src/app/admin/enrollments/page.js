@@ -35,10 +35,10 @@ export default function Page() {
         onChange={(page) => get({ page })}
         onCreate={() => drawers.create_enrollment({ onSubmit: get })}
       >
-        {enrollments.map((enrollment) => {
+        {enrollments.map((enrollment, index) => {
           return [
-            <User src={enrollment?.employee?.avatar} name={enrollment?.employee?.name} description={enrollment?.employee?.id} />,
-            <User src={enrollment?.course?.image} name={enrollment?.course?.name} />,
+            <User key={index} src={enrollment?.employee?.avatar} name={enrollment?.employee?.name} description={enrollment?.employee?.code} />,
+            <User key={index} src={enrollment?.course?.image} name={enrollment?.course?.name} />,
           ];
         })}
       </Table>

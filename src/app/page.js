@@ -12,9 +12,9 @@ export default function Page() {
   const me = async () => {
     const response = await services.auth.me();
 
-    if (response?.data?.role._id == config.role.admin) router.push('/admin');
-    //if (response?.data?.role._id == config.role.user) router.push('/user');
-    //else router.push('/login');
+    if (response?.data?.role?.id == config.role.admin) router.push('/admin');
+    else if (response?.data?.role.id == config.role.user) router.push('/user');
+    else router.push('/login');
   };
 
   useEffect(() => {

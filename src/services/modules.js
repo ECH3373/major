@@ -2,14 +2,14 @@ import { config } from '@/config';
 import { interceptors } from '@/interceptors';
 
 const index = async ({ params = {} } = {}) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/modules`, {
+  const response = await interceptors.gateway.get(`${config.api.gateway}/major/modules`, {
     params,
   });
   return response;
 };
 
 const show = async ({ id }) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/modules/${id}`);
+  const response = await interceptors.gateway.get(`${config.api.gateway}/major/modules/${id}`);
   return response;
 };
 
@@ -19,7 +19,7 @@ const store = async ({ course_id, name, description, image, order } = {}) => {
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -27,7 +27,7 @@ const store = async ({ course_id, name, description, image, order } = {}) => {
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.post(`${config.api.gateway}/modules`, {
+  const response = await interceptors.gateway.post(`${config.api.gateway}/major/modules`, {
     course_id,
     name,
     description,
@@ -44,7 +44,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -52,7 +52,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.patch(`${config.api.gateway}/modules/${id}`, {
+  const response = await interceptors.gateway.patch(`${config.api.gateway}/major/modules/${id}`, {
     name,
     description,
     image,
@@ -63,7 +63,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
 };
 
 const destroy = async ({ id } = {}) => {
-  const response = await interceptors.gateway.delete(`${config.api.gateway}/modules/${id}`);
+  const response = await interceptors.gateway.delete(`${config.api.gateway}/major/modules/${id}`);
   return response;
 };
 

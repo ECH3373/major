@@ -13,7 +13,7 @@ export const Navigation = ({ items = [] }) => {
 
   const me = async () => {
     const response = await services.auth.me();
-    setEmployee(response?.data);
+    setEmployee(response?.data?.employee);
   };
 
   const logout = () => {

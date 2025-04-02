@@ -38,9 +38,11 @@ gateway.interceptors.response.use(
         request.headers['Authorization'] = `Bearer ${new_access_token}`;
         return gateway(request);
       } catch (error) {
-        window.location.href = '/login';
+        //window.location.href = '/login';
         return Promise.resolve(error);
       }
+    } else {
+      //window.location.href = '/login';
     }
 
     return Promise.resolve(error.response.data);

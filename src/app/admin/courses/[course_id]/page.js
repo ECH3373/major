@@ -29,7 +29,7 @@ export default function Page() {
     <Screen>
       <Grid title="Módulos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_module({ course_id: params.course_id, onSubmit: get })}>
         {modules.map((module) => {
-          return <Item key={module._id} src={module.image} title={module.name} description={module.description} onPress={() => drawers.edit_module({ id: module._id, onSubmit: get })} />;
+          return <Item key={module.id} src={module.image} title={module.name} description={module.description} onPress={() => drawers.edit_module({ id: module.id, onSubmit: get })} />;
         })}
       </Grid>
     </Screen>

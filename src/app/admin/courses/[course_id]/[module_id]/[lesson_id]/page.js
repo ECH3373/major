@@ -17,8 +17,6 @@ export default function Page() {
     setIsLoading(true);
     const response = await services.resources.index({ params: { limit: 100, search, lesson_id: params.lesson_id } });
 
-    console.log(response);
-
     if (response?.data) serResources(response?.data);
     setIsLoading(false);
   };
@@ -32,11 +30,11 @@ export default function Page() {
       <Grid title="Recursos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_resource({ lesson_id: params.lesson_id, onSubmit: get })}>
         {resources.map((resource) => (
           <Item
-            key={resource._id}
+            key={index}
             src={resource.image}
             title={`${resource.name} (${resource.quantity})`}
             description={resource.description}
-            onPress={() => drawers.edit_resource({ id: resource._id, onSubmit: get })}
+            onPress={() => drawers.edit_resource({ id: resource.id, onSubmit: get })}
           />
         ))}
       </Grid>
