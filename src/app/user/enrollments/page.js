@@ -38,7 +38,7 @@ export default function Page() {
         {enrollments.map((enrollment) => {
           return (
             <Item
-              key={index}
+              key={enrollment?.id}
               src={enrollment?.course?.image}
               title={enrollment?.course?.name}
               description={enrollment?.course?.description}
