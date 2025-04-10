@@ -2,14 +2,14 @@ import { config } from '@/config';
 import { interceptors } from '@/interceptors';
 
 const index = async ({ params = {} } = {}) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/major/modules`, {
+  const response = await interceptors.gateway.get(`${config.api.gateway}/courses/modules`, {
     params,
   });
   return response;
 };
 
 const show = async ({ id }) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/major/modules/${id}`);
+  const response = await interceptors.gateway.get(`${config.api.gateway}/courses/modules/${id}`);
   return response;
 };
 
@@ -27,7 +27,7 @@ const store = async ({ course_id, name, description, image, order } = {}) => {
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.post(`${config.api.gateway}/major/modules`, {
+  const response = await interceptors.gateway.post(`${config.api.gateway}/courses/modules`, {
     course_id,
     name,
     description,
@@ -52,7 +52,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
     }
   } catch (error) {}
 
-  const response = await interceptors.gateway.patch(`${config.api.gateway}/major/modules/${id}`, {
+  const response = await interceptors.gateway.patch(`${config.api.gateway}/courses/modules/${id}`, {
     name,
     description,
     image,
@@ -63,7 +63,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
 };
 
 const destroy = async ({ id } = {}) => {
-  const response = await interceptors.gateway.delete(`${config.api.gateway}/major/modules/${id}`);
+  const response = await interceptors.gateway.delete(`${config.api.gateway}/courses/modules/${id}`);
   return response;
 };
 

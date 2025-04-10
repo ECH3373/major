@@ -45,7 +45,7 @@ export const EditResource = ({ id, onSubmit }) => {
 
       <Form.Row>
         <Picker onChange={setImage} label="Imagen" placeholder="Imagen de recurso" />
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el recurso" />
+        <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el recurso" />
       </Form.Row>
 
       <InputNumber value={quantity} onChange={setQuantity} minValue={1} label="Cantidad" placeholder="Cantidad necesaria" />

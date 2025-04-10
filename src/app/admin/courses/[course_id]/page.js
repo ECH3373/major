@@ -16,7 +16,7 @@ export default function Page() {
 
   const get = async ({ search = '' } = {}) => {
     setIsLoading(true);
-    const response = await services.modules.index({ params: { limit: 100, search, sort: 'order', course_id: params.course_id } });
+    const response = await services.modules.index({ params: { limit: 100, search, sort: [{ order: 'asc' }], course_id: params.course_id } });
     if (response?.data) setModules(response?.data);
     setIsLoading(false);
   };

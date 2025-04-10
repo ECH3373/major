@@ -1,5 +1,5 @@
 import { Navigation } from '@/components';
-import { Book, Home, User } from '@/icons';
+import { Book, Calendar, Home, Store } from '@/icons';
 
 export default function Layout({ children }) {
   return (
@@ -8,7 +8,8 @@ export default function Layout({ children }) {
         items={[
           { link: '/admin/', name: 'Inicio', icon: <Home /> },
           { link: '/admin/courses', name: 'Cursos', icon: <Book /> },
-          { link: '/admin/enrollments', name: 'Inscripciones', icon: <User /> },
+          { link: '/admin/events', name: 'Eventos', icon: <Calendar /> },
+          { link: '/admin/store', name: 'Tienda', icon: <Store /> },
         ]}
       />
       {children}

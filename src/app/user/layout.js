@@ -7,7 +7,7 @@ export default function Layout({ children }) {
       <Navigation
         items={[
           { link: '/user/', name: 'Inicio', icon: <Home /> },
-          { link: '/user/enrollments', name: 'Cursos', icon: <Book /> },
+          { link: '/user/events', name: 'Eventos', icon: <Book /> },
         ]}
       />
       {children}

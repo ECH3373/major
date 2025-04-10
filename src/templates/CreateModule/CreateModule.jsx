@@ -15,7 +15,7 @@ export const CreateModule = ({ course_id, onSubmit }) => {
   const [addReferencePosition, setAddReferencePosition] = useState('+1');
 
   const get = async () => {
-    const response = await services.modules.index({ limit: 100, filters: [['course_id', [course_id]]], order: [['order', 'asc']] });
+    const response = await services.modules.index({ params: { limit: 100, course_id, sort: [{ order: 'asc' }] } });
     if (response?.data) setModules(response?.data);
     if (response?.data?.length > 0) setReferencePosition(String(response?.data[response?.data?.length - 1].order));
   };

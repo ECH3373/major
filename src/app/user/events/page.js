@@ -2,7 +2,6 @@
 
 import { Grid, Item } from '@/components';
 import { useDrawers } from '@/hooks';
-import { Book, Clock } from '@/icons';
 import { services } from '@/services';
 import { Screen } from '@/ui';
 import { usePathname, useRouter } from 'next/navigation';
@@ -39,11 +38,9 @@ export default function Page() {
           return (
             <Item
               key={enrollment?.id}
-              src={enrollment?.course?.image}
-              title={enrollment?.course?.name}
-              description={enrollment?.course?.description}
-              //progress={(progress * 100) / lessons}
-              onPress={() => router.push(`${pathname}/${enrollment.id}`)}
+              title={enrollment?.event?.name}
+              description={`${enrollment?.event?.start_date} - ${enrollment?.event?.end_date}`}
+              onPress={() => router.push(`${pathname}/${enrollment?.event?.course_id}`)}
             />
           );
         })}

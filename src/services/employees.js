@@ -1,8 +1,8 @@
 import { config } from '@/config';
 import { interceptors } from '@/interceptors';
 
-const index = async ({ page, limit, search, filters, order } = {}) => {
-  const response = await interceptors.gateway.get(`${config.api.gateway}/employees`, { params: { page, limit, search, filters, order } });
+const index = async ({ params = {} } = {}) => {
+  const response = await interceptors.gateway.get(`${config.api.gateway}/employees`, { params });
   return response;
 };
 

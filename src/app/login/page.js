@@ -14,6 +14,7 @@ export default function Page() {
 
   const handleSubmit = async () => {
     const response = await services.auth.login({ username });
+
     if (response?.status == 'error') addToast({ title: 'Error', description: response?.error, color: 'danger' });
     if (response?.status == 'success') router.push('/');
   };

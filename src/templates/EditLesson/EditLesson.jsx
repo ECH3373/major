@@ -35,7 +35,7 @@ export const EditLesson = ({ id, onSubmit }) => {
   };
 
   const get_lessons = async (module_id) => {
-    const response = await services.lessons.index({ limit: 100, filters: [['module_id', [module_id]]], order: [['order', 'asc']] });
+    const response = await services.lessons.index({ limit: 100, module_id, sort: [{ order: 'asc' }] });
     if (response?.data) setLessons(response?.data);
   };
 
@@ -59,7 +59,7 @@ export const EditLesson = ({ id, onSubmit }) => {
 
       <Form.Row>
         <Picker value={image} onChange={setImage} label="Imagen" placeholder="Imagen de lección" />
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para la lección" />
+        <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para la lección" />
       </Form.Row>
 
       <Form.Row>

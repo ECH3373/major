@@ -29,7 +29,7 @@ export const Navigation = ({ items = [] }) => {
   const logo = (
     <div onClick={() => router.push('/')} className="flex justify-center items-center gap-1 cursor-pointer">
       <img src={config.image.logo} className="h-16" />
-      <p className="font-bold">MAESTRO JOYERO OFERBE</p>
+      <p className="font-bold">MAESTRO JOYERO ORFEBRE</p>
     </div>
   );
 

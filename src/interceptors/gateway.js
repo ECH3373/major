@@ -31,18 +31,18 @@ gateway.interceptors.response.use(
 
       try {
         const refresh_token = Cookies.get('refresh_token');
-        const { data } = await gateway.post('/refresh', { refresh_token });
-        const new_access_token = data.access_token;
+        const { data } = await axios.post(`${config.api.gateway}/auth/refresh`, { refresh_token });
+        const new_access_token = data.data.access_token;
         Cookies.set('access_token', new_access_token);
         gateway.defaults.headers.common['Authorization'] = `Bearer ${new_access_token}`;
         request.headers['Authorization'] = `Bearer ${new_access_token}`;
         return gateway(request);
       } catch (error) {
-        //window.location.href = '/login';
+        window.location.href = '/login';
         return Promise.resolve(error);
       }
     } else {
-      //window.location.href = '/login';
+      console.log(error);
     }
 
     return Promise.resolve(error.response.data);

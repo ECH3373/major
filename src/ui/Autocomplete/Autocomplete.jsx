@@ -3,7 +3,7 @@ import React from 'react';
 
 export const Autocomplete = ({ children = [], onSearch, onChange, ...props }) => {
   return (
-    <AutocompleteHUI onInputChange={onSearch} onSelectionChange={onChange} {...props}>
+    <AutocompleteHUI onInputChange={onSearch} onSelectionChange={onChange} variant="bordered" {...props}>
       {children.map((option) => (
         <AutocompleteItem key={option.value}>{option.name}</AutocompleteItem>
       ))}

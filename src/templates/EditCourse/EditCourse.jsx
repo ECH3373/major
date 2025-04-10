@@ -46,7 +46,7 @@ export const EditCourse = ({ id, onSubmit }) => {
 
       <Form.Row>
         <Picker value={image} onChange={setImage} label="Imagen" placeholder="Imagen de curso" />
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
+        <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
       </Form.Row>
     </Form>
   );

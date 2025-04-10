@@ -2,7 +2,6 @@
 
 import { Grid, Item } from '@/components';
 import { useDrawers } from '@/hooks';
-import { Book, Clock } from '@/icons';
 import { services } from '@/services';
 import { Screen } from '@/ui';
 import { useParams, usePathname, useRouter } from 'next/navigation';
@@ -19,11 +18,8 @@ export default function Page() {
   const get = async () => {
     setIsLoading(true);
 
-    const response = await services.enrollments.show({ id: params.enrollment_id });
-    if (response?.data) {
-      const lessons = await services.lessons.index({ params: { module_id: params.module_id } });
-      if (lessons?.data) setLessons(lessons?.data);
-    }
+    const lessons = await services.lessons.index({ params: { module_id: params.module_id, sort: [{ order: 'asc' }] } });
+    if (lessons?.data) setLessons(lessons?.data);
 
     setIsLoading(false);
   };
@@ -38,17 +34,7 @@ export default function Page() {
         {lessons.map((lesson, index) => {
           let isLocked = false;
 
-          return (
-            <Item
-              key={index}
-              src={lesson?.image}
-              title={lesson?.name}
-              description={lesson?.description}
-              isLocked={isLocked}
-              //progress={lesson.progress ? 100 : 0}
-              onPress={() => router.push(`${pathname}/${lesson.id}`)}
-            />
-          );
+          return <Item key={index} src={lesson?.image} title={lesson?.name} description={lesson?.description} isLocked={isLocked} onPress={() => router.push(`${pathname}/${lesson.id}`)} />;
         })}
       </Grid>
     </Screen>

@@ -31,7 +31,7 @@ export const EditModule = ({ id, onSubmit }) => {
   };
 
   const get_modules = async (course_id) => {
-    const response = await services.modules.index({ limit: 100, filters: [['course_id', [course_id]]], order: [['order', 'asc']] });
+    const response = await services.modules.index({ params: { limit: 100, course_id, sort: [{ order: 'asc' }] } });
     if (response?.data) setModules(response?.data);
   };
 
@@ -55,7 +55,7 @@ export const EditModule = ({ id, onSubmit }) => {
 
       <Form.Row>
         <Picker value={image} onChange={setImage} label="Imagen" placeholder="Imagen de módulo" />
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
+        <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
       </Form.Row>
 
       {modules.length > 0 && (

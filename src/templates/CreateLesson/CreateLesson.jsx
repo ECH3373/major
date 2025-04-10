@@ -15,7 +15,7 @@ export const CreateLesson = ({ module_id, onSubmit }) => {
   const [addReferencePosition, setAddReferencePosition] = useState('+1');
 
   const get = async () => {
-    const response = await services.lessons.index({ limit: 100, filters: [['module_id', [module_id]]], order: [['order', 'asc']] });
+    const response = await services.lessons.index({ params: { limit: 100, module_id, sort: [{ order: 'asc' }] } });
     if (response?.data) setLessons(response?.data);
     if (response?.data?.length > 0) setReferencePosition(String(response?.data[response?.data?.length - 1].order));
   };

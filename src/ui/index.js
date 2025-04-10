@@ -6,6 +6,7 @@ import { Divider } from './Divider/Divider';
 import { Drawer } from './Drawer/Drawer';
 import { Dropdown } from './Dropdown/Dropdown';
 import { Input } from './Input/Input';
+import { InputDate } from './InputDate/InputDate';
 import { InputNumber } from './InputNumber/InputNumber';
 import { Navbar } from './Navbar/Navbar';
 import { Picker } from './Picker/Picker';
@@ -15,7 +16,8 @@ import { Search } from './Search/Search';
 import { Select } from './Select/Select';
 import { Spinner } from './Spinner/Spinner';
 import { Table } from './Table/Table';
+import { Tabs } from './Tabs/Tabs';
 import { Textarea } from './Textarea/Textarea';
 import { User } from './User/User';
 
-export { Autocomplete, Avatar, Button, Card, Divider, Drawer, Dropdown, Input, InputNumber, Navbar, Picker, Progress, Screen, Search, Select, Spinner, Table, Textarea, User };
+export { Autocomplete, Avatar, Button, Card, Divider, Drawer, Dropdown, Input, InputDate, InputNumber, Navbar, Picker, Progress, Screen, Search, Select, Spinner, Table, Tabs, Textarea, User };

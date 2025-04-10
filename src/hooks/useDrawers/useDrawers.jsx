@@ -1,7 +1,7 @@
 import { useDrawer } from '@/context';
 import { Delete, Folder } from '@/icons';
 import { services } from '@/services';
-import { CreateCourse, CreateEnrollment, CreateLesson, CreateModule, CreateResource, EditCourse, EditLesson, EditModule } from '@/templates';
+import { CreateCourse, CreateEnrollment, CreateEvent, CreateLesson, CreateModule, CreateProduct, CreateResource, EditCourse, EditLesson, EditModule } from '@/templates';
 import { EditResource } from '@/templates/EditResource/EditResource';
 import { Button } from '@/ui';
 import { addToast } from '@heroui/react';
@@ -178,14 +178,32 @@ export const useDrawers = () => {
     });
   };
 
-  const create_enrollment = ({ onSubmit }) => {
+  const create_enrollment = ({ event_id, onSubmit }) => {
     const handleSubmit = async (response) => {
       drawer.close();
       if (onSubmit) await onSubmit(response);
     };
 
-    drawer.fire({ content: <CreateEnrollment onSubmit={handleSubmit} /> });
+    drawer.fire({ content: <CreateEnrollment event_id={event_id} onSubmit={handleSubmit} /> });
   };
 
-  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment };
+  const create_event = ({ onSubmit }) => {
+    const handleSubmit = async (response) => {
+      drawer.close();
+      if (onSubmit) await onSubmit(response);
+    };
+
+    drawer.fire({ content: <CreateEvent onSubmit={handleSubmit} /> });
+  };
+
+  const create_product = ({ onSubmit }) => {
+    const handleSubmit = async (response) => {
+      drawer.close();
+      if (onSubmit) await onSubmit(response);
+    };
+
+    drawer.fire({ content: <CreateProduct onSubmit={handleSubmit} /> });
+  };
+
+  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment, create_event, create_product };
 };

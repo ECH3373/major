@@ -16,7 +16,7 @@ export default function Page() {
 
   const get = async ({ search = '' } = {}) => {
     setIsLoading(true);
-    const response = await services.courses.index({ limit: 100, search });
+    const response = await services.courses.index({ params: { limit: 100, search, sort: [{ name: 'asc' }] } });
     if (response?.data) setCourses(response?.data);
     setIsLoading(false);
   };
