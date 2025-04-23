@@ -1,5 +1,6 @@
 import { config } from '@/config';
 import { interceptors } from '@/interceptors';
+import axios from 'axios';
 
 const index = async ({ params = {} } = {}) => {
   const response = await interceptors.gateway.get(`${config.api.gateway}/courses/modules`, {
@@ -23,7 +24,7 @@ const store = async ({ course_id, name, description, image, order } = {}) => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      image = hub?.data?.url;
+      image = hub?.data?.data?.url;
     }
   } catch (error) {}
 
@@ -48,7 +49,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      image = hub?.data?.url;
+      image = hub?.data?.data?.url;
     }
   } catch (error) {}
 
