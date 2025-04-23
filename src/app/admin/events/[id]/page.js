@@ -14,16 +14,17 @@ export default function Page() {
   const [enrollments, setEnrollments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const get = async () => {
+  const get = useCallback(async () => {
     setIsLoading(true);
     const response = await services.enrollments.index({ params: { event_id: params.id } });
     if (response?.data) setEnrollments(response?.data);
     if (response?.meta?.pagination) setPagination(response?.meta?.pagination);
-  };
+    setIsLoading(false);
+  }, [params.id]);
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   return (
     <Screen>

@@ -6,7 +6,7 @@ import { Book, Clock } from '@/icons';
 import { services } from '@/services';
 import { Screen } from '@/ui';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const params = useParams();
@@ -14,16 +14,19 @@ export default function Page() {
   const [modules, setModules] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const get = async ({ search = '' } = {}) => {
-    setIsLoading(true);
-    const response = await services.modules.index({ params: { limit: 100, search, sort: [{ order: 'asc' }], course_id: params.course_id } });
-    if (response?.data) setModules(response?.data);
-    setIsLoading(false);
-  };
+  const get = useCallback(
+    async ({ search = '' } = {}) => {
+      setIsLoading(true);
+      const response = await services.modules.index({ params: { limit: 100, search, sort: [{ order: 'asc' }], course_id: params.course_id } });
+      if (response?.data) setModules(response?.data);
+      setIsLoading(false);
+    },
+    [params.course_id],
+  );
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   return (
     <Screen>

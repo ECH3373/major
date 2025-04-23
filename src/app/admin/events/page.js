@@ -5,7 +5,7 @@ import { Folder } from '@/icons';
 import { services } from '@/services';
 import { Button, Screen, Table, User } from '@/ui';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const router = useRouter();
@@ -15,18 +15,18 @@ export default function Page() {
   const [pagination, setPagination] = useState({ page: 1, pages: 1 });
   const [isLoading, setIsLoading] = useState(false);
 
-  const get = async ({ search = '', page = 1 } = {}) => {
+  const get = useCallback(async ({ search = '', page = 1 } = {}) => {
     setIsLoading(true);
     const response = await services.events.index({ params: { limit: 10, search, page } });
 
     if (response?.data) setEvents(response?.data);
     if (response?.meta?.pagination) setPagination(response?.meta?.pagination);
     setIsLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   return (
     <Screen>
@@ -42,17 +42,17 @@ export default function Page() {
       >
         {events.map((event, index) => {
           return [
-            <div key={index}>{event?.name}</div>,
+            <div key={'name'}>{event?.name}</div>,
 
-            <div key={index}>{event?.course?.name}</div>,
+            <div key={'course'}>{event?.course?.name}</div>,
 
-            <div key={index}>{event?.start_date}</div>,
+            <div key={'start'}>{event?.start_date}</div>,
 
-            <div key={index}>{event?.end_date}</div>,
+            <div key={'end'}>{event?.end_date}</div>,
 
-            <User key={index} src={event?.trainer?.avatar} name={event?.trainer?.name} />,
+            <User key={'trainer'} src={event?.trainer?.avatar} name={event?.trainer?.name} />,
 
-            <div key={index}>
+            <div key={'action'}>
               <Button onPress={() => router.push(`${pathname}/${event.id}`)} startContent={<Folder />} isIconOnly />
             </div>,
           ];

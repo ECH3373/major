@@ -5,7 +5,7 @@ import { useDrawers } from '@/hooks';
 import { services } from '@/services';
 import { Screen } from '@/ui';
 import { useParams, usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const params = useParams();
@@ -15,7 +15,7 @@ export default function Page() {
   const [modules, setModules] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const get = async () => {
+  const get = useCallback(async () => {
     setIsLoading(true);
     const course = await services.courses.show({ id: params.course_id });
 
@@ -25,11 +25,11 @@ export default function Page() {
     }
 
     setIsLoading(false);
-  };
+  }, [params.course_id]);
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   return (
     <Screen>

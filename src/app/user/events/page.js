@@ -5,7 +5,7 @@ import { useDrawers } from '@/hooks';
 import { services } from '@/services';
 import { Screen } from '@/ui';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function Page() {
   const [enrollments, setEnrollments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const get = async ({ search = '' } = {}) => {
+  const get = useCallback(async ({ search = '' } = {}) => {
     setIsLoading(true);
 
     const me = await services.auth.me();
@@ -25,19 +25,19 @@ export default function Page() {
     }
 
     setIsLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     get();
-  }, []);
+  }, [get]);
 
   return (
     <Screen>
       <Grid title="Cursos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
-        {enrollments.map((enrollment) => {
+        {enrollments.map((enrollment, index) => {
           return (
             <Item
-              key={enrollment?.id}
+              key={index}
               title={enrollment?.event?.name}
               description={`${enrollment?.event?.start_date} - ${enrollment?.event?.end_date}`}
               onPress={() => router.push(`${pathname}/${enrollment?.event?.course_id}`)}
