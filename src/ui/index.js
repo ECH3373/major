@@ -1,5 +1,6 @@
 import { Autocomplete } from './Autocomplete/Autocomplete';
 import { Avatar } from './Avatar/Avatar';
+import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Button } from './Button/Button';
 import { Card } from './Card/Card';
 import { Divider } from './Divider/Divider';
@@ -21,4 +22,28 @@ import { Tabs } from './Tabs/Tabs';
 import { Textarea } from './Textarea/Textarea';
 import { User } from './User/User';
 
-export { Autocomplete, Avatar, Button, Card, Divider, Drawer, Dropdown, Event, Input, InputDate, InputNumber, Navbar, Picker, Progress, Screen, Search, Select, Spinner, Table, Tabs, Textarea, User };
+export {
+  Autocomplete,
+  Avatar,
+  Breadcrumb,
+  Button,
+  Card,
+  Divider,
+  Drawer,
+  Dropdown,
+  Event,
+  Input,
+  InputDate,
+  InputNumber,
+  Navbar,
+  Picker,
+  Progress,
+  Screen,
+  Search,
+  Select,
+  Spinner,
+  Table,
+  Tabs,
+  Textarea,
+  User,
+};

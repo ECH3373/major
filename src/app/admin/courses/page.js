@@ -3,7 +3,7 @@
 import { Grid, Item } from '@/components';
 import { useDrawers } from '@/hooks';
 import { services } from '@/services';
-import { Screen } from '@/ui';
+import { Breadcrumb, Screen } from '@/ui';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -32,7 +32,7 @@ export default function Page() {
 
   return (
     <Screen>
-      <Grid title="Cursos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
+      <Grid navigate={<Breadcrumb>{[{ name: 'Cursos', is_active: true }]}</Breadcrumb>} isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
         {courses.map((course) => (
           <Item
             key={course.id} // Asegúrate de que 'course.id' sea único

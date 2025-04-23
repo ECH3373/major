@@ -2,12 +2,13 @@ import { Create } from '@/icons';
 import { Button, Card, Search, Spinner } from '@/ui';
 import React from 'react';
 
-export const Grid = ({ children, title = '', onSearch, onCreate, isLoading = false }) => {
+export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoading = false }) => {
   return (
     <div className="flex flex-col gap-4">
       <Card className="flex flex-row justify-between items-center p-4">
         <div>
           <h3 className="text-4xl font-bold">{title}</h3>
+          {navigate}
         </div>
 
         <div className="flex items-center gap-2">

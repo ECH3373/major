@@ -3,11 +3,13 @@
 import { Grid, Item } from '@/components';
 import { useDrawers } from '@/hooks';
 import { services } from '@/services';
-import { Screen } from '@/ui';
-import { useParams } from 'next/navigation';
+import { Breadcrumb, Screen } from '@/ui';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
+  const router = useRouter();
+  const pathname = usePathname();
   const params = useParams();
   const drawers = useDrawers();
   const [lessons, setLessons] = useState([]);
@@ -30,7 +32,42 @@ export default function Page() {
 
   return (
     <Screen>
-      <Grid title="Lecciones" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_lesson({ module_id: params.module_id, onSubmit: get })}>
+      <Grid
+        navigate={
+          <Breadcrumb>
+            {[
+              {
+                name: 'Cursos',
+                press: () => {
+                  const newPathname = pathname.split('/').slice(0, -3).join('/');
+                  router.push(newPathname);
+                },
+              },
+              {
+                name: 'Módulos',
+
+                press: () => {
+                  const newPathname = pathname.split('/').slice(0, -2).join('/');
+                  router.push(newPathname);
+                },
+              },
+              {
+                name: 'Lecciones',
+
+                press: () => {
+                  const newPathname = pathname.split('/').slice(0, -1).join('/');
+                  router.push(newPathname);
+                },
+              },
+
+              { name: 'Recursos', is_active: true },
+            ]}
+          </Breadcrumb>
+        }
+        isLoading={isLoading}
+        onSearch={get}
+        onCreate={() => drawers.create_lesson({ module_id: params.module_id, onSubmit: get })}
+      >
         {lessons.map((lesson) => {
           return (
             <Item
