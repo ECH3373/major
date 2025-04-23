@@ -4,7 +4,7 @@ import { useDrawers } from '@/hooks';
 import { services } from '@/services';
 import { Screen, Table, User } from '@/ui';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page() {
   const params = useParams();
