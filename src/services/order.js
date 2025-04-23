@@ -13,8 +13,6 @@ const show = async ({ id }) => {
 };
 
 const store = async ({ employee_id } = {}) => {
-  console.log(employee_id);
-
   const response = await interceptors.gateway.post(`${config.api.gateway}/store/orders`, { employee_id });
   return response;
 };

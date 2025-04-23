@@ -13,6 +13,7 @@ export default function Page() {
     const response = await services.auth.me();
 
     if (response?.data?.role?.id == config.role.admin) router.push('/admin');
+    else if (response?.data?.role.id == config.role.trainer) router.push('/trainer');
     else if (response?.data?.role.id == config.role.user) router.push('/user');
     else router.push('/login');
   };

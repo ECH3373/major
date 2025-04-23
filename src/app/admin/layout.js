@@ -9,7 +9,7 @@ export default function Layout({ children }) {
           { link: '/admin/', name: 'Inicio', icon: <Home /> },
           { link: '/admin/courses', name: 'Cursos', icon: <Book /> },
           { link: '/admin/events', name: 'Eventos', icon: <Calendar /> },
-          { link: '/admin/store', name: 'Tienda', icon: <Store /> },
+          //{ link: '/admin/store', name: 'Tienda', icon: <Store /> },
         ]}
       />
       {children}

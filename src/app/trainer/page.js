@@ -9,17 +9,21 @@ export default function Page() {
   const [events, setEvents] = useState([]);
 
   const getEvents = async () => {
-    const response = await services.events.index();
-    const data = response.data;
+    const me = await services.auth.me();
 
-    for (const event of data) {
-      const enrollments = await services.enrollments.index({
-        params: { event_id: event.id },
-      });
-      event.enrollments = enrollments.data;
+    if (me?.data?.employee?.id) {
+      const response = await services.events.index({ params: { trainer_id: me?.data?.employee?.id } });
+      const data = response.data;
+
+      for (const event of data) {
+        const enrollments = await services.enrollments.index({
+          params: { event_id: event.id },
+        });
+        event.enrollments = enrollments.data;
+      }
+
+      setEvents(data);
     }
-
-    setEvents(data);
   };
 
   useEffect(() => {
