@@ -11,7 +11,6 @@ export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-  const drawers = useDrawers();
   const [module, setModule] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +60,6 @@ export default function Page() {
         }
         isLoading={isLoading}
         onSearch={get}
-        onCreate={() => drawers.create_course({ onSubmit: get })}
       >
         {lessons.map((lesson, index) => {
           let isLocked = false;

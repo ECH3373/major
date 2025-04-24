@@ -33,7 +33,7 @@ export default function Page() {
 
   return (
     <Screen>
-      <Grid navigate={<Breadcrumb>{[{ name: 'Eventos', is_active: true }]}</Breadcrumb>} isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
+      <Grid navigate={<Breadcrumb>{[{ name: 'Eventos', is_active: true }]}</Breadcrumb>} isLoading={isLoading} onSearch={get}>
         {enrollments.map((enrollment, index) => {
           return (
             <Item

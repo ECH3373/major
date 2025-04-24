@@ -50,7 +50,6 @@ export default function Page() {
         }
         isLoading={isLoading}
         onSearch={get}
-        onCreate={() => drawers.create_course({ onSubmit: get })}
       >
         {modules.map((module, index) => {
           let isLocked = false;

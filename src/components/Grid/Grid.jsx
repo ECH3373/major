@@ -13,7 +13,7 @@ export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoa
 
         <div className="flex items-center gap-2">
           <Search onSubmit={(search) => onSearch({ search })} />
-          <Button onPress={onCreate} startContent={<Create />} isIconOnly />
+          {onCreate && <Button onPress={onCreate} startContent={<Create />} isIconOnly />}
         </div>
       </Card>
 

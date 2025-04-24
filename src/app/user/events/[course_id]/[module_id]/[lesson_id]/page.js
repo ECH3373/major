@@ -19,7 +19,7 @@ export default function Page() {
     if (response?.data) {
       setLesson(response?.data);
       // Llamamos a 'wait' pasando los segundos después de cargar la lección
-      wait(response?.data?.duration_seconds);
+      //wait(response?.data?.duration_seconds);
     }
   }, [params.module_id]);
 
@@ -47,9 +47,10 @@ export default function Page() {
           const newPathname = pathname.split('/').slice(0, -1).join('/');
           router.push(newPathname);
         }}
-        color="danger"
+        size="sm"
+        color="default"
         isIconOnly
-        className="absolute top-2 right-2"
+        className="absolute top-4 right-9 rounded-full bg-foreground-50"
       >
         X
       </Button>
