@@ -14,17 +14,24 @@ const show = async ({ id }) => {
   return response;
 };
 
-const store = async ({ course_id, name, description, image, order } = {}) => {
+const store = async ({ course_id, name, description, image, background, order } = {}) => {
   try {
     if (name && image) {
-      const formData = new FormData();
-      formData.append('file', image);
+      const formDataImage = new FormData();
+      formDataImage.append('file', image);
+      const formDataBg = new FormData();
+      formDataBg.append('file', image);
 
-      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formDataImage, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      const hub_2 = await axios.post(`${config.api.hub}/hub`, formDataBg, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       image = hub?.data?.data?.url;
+      background = hub?.data?.data?.hub_2;
     }
   } catch (error) {}
 
@@ -33,23 +40,31 @@ const store = async ({ course_id, name, description, image, order } = {}) => {
     name,
     description,
     image,
+    background,
     order,
   });
 
   return response;
 };
 
-const update = async ({ id, name, description, image, order } = {}) => {
+const update = async ({ id, name, description, image, background, order } = {}) => {
   try {
     if (name && image) {
-      const formData = new FormData();
-      formData.append('file', image);
+      const formDataImage = new FormData();
+      formDataImage.append('file', image);
+      const formDataBg = new FormData();
+      formDataBg.append('file', image);
 
-      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
+      const hub = await axios.post(`${config.api.hub}/hub`, formDataImage, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      const hub_2 = await axios.post(`${config.api.hub}/hub`, formDataBg, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       image = hub?.data?.data?.url;
+      background = hub?.data?.data?.hub_2;
     }
   } catch (error) {}
 
@@ -57,6 +72,7 @@ const update = async ({ id, name, description, image, order } = {}) => {
     name,
     description,
     image,
+    background,
     order,
   });
 

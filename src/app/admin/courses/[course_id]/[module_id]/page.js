@@ -12,6 +12,7 @@ export default function Page() {
   const pathname = usePathname();
   const params = useParams();
   const drawers = useDrawers();
+  const [module, setModule] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,8 +20,10 @@ export default function Page() {
   const get = useCallback(
     async ({ search = '' } = {}) => {
       setIsLoading(true);
+      const md = await services.modules.show({ id: params.module_id });
       const response = await services.lessons.index({ params: { limit: 100, search, sort: [{ order: 'asc' }], module_id: params.module_id } });
       if (response?.data) setLessons(response?.data);
+      if (md?.data) setModule(md?.data);
       setIsLoading(false);
     },
     [params.module_id], // Dependemos de params.module_id para que se ejecute correctamente cuando cambie
@@ -31,7 +34,12 @@ export default function Page() {
   }, [get]); // Ejecutamos 'get' solo cuando cambie
 
   return (
-    <Screen>
+    <Screen
+      className="screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${module?.background})`,
+      }}
+    >
       <Grid
         navigate={
           <Breadcrumb>

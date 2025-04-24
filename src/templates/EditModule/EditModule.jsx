@@ -11,6 +11,7 @@ export const EditModule = ({ id, onSubmit }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [background, setBackground] = useState('');
   const [referencePosition, setReferencePosition] = useState('');
   const [addReferencePosition, setAddReferencePosition] = useState('+1');
 
@@ -26,6 +27,7 @@ export const EditModule = ({ id, onSubmit }) => {
       setName(response?.data?.name);
       setDescription(response?.data?.description);
       setImage(response?.data?.image);
+      setBackground(response?.data?.background);
       setReferencePosition((response?.data?.order - 1).toString());
     }
   };
@@ -37,7 +39,7 @@ export const EditModule = ({ id, onSubmit }) => {
 
   const save = async () => {
     const order = Number(referencePosition) + (addReferencePosition === '-1' ? 0 : 1);
-    const response = await services.modules.update({ id, name, description, image, order });
+    const response = await services.modules.update({ id, name, description, image, background, order });
     if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
     if (response?.status == 'success') {
       if (onSubmit) onSubmit(response);
@@ -52,11 +54,6 @@ export const EditModule = ({ id, onSubmit }) => {
   return (
     <Form title="Editar módulo" subtitle="Editar módulo existente" submitText="Guardar cambios" onSubmit={save}>
       <Input value={name} onChange={(e) => setName(e.target.value)} label="Nombre" placeholder="Agrega un nombre para el módulo" />
-
-      <Form.Row>
-        <Picker value={image} onChange={setImage} label="Imagen" placeholder="Imagen de módulo" />
-        <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
-      </Form.Row>
 
       {modules.length > 0 && (
         <Form.Row>
@@ -78,6 +75,13 @@ export const EditModule = ({ id, onSubmit }) => {
           </Select>
         </Form.Row>
       )}
+
+      <Textarea value={description || ''} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el curso" />
+
+      <Form.Row>
+        <Picker className="flex-1" value={image} onChange={setImage} label="Imagen" placeholder="Imagen de módulo" />
+        <Picker className="flex-1" value={background} onChange={setBackground} label="Fondo" placeholder="Fondo de módulo" />
+      </Form.Row>
     </Form>
   );
 };

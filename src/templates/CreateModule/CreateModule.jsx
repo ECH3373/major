@@ -11,6 +11,7 @@ export const CreateModule = ({ course_id, onSubmit }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [background, setBackground] = useState('');
   const [referencePosition, setReferencePosition] = useState('');
   const [addReferencePosition, setAddReferencePosition] = useState('+1');
 
@@ -22,7 +23,7 @@ export const CreateModule = ({ course_id, onSubmit }) => {
 
   const create = async () => {
     const order = Number(referencePosition) + (addReferencePosition === '-1' ? 0 : 1);
-    const response = await services.modules.store({ course_id, name, description, image, order });
+    const response = await services.modules.store({ course_id, name, description, image, background, order });
     if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
 
     if (response?.status == 'success') {
@@ -38,11 +39,6 @@ export const CreateModule = ({ course_id, onSubmit }) => {
   return (
     <Form title="Crear módulo" subtitle="Crea un nuevo módulo" submitText="Crear" onSubmit={create}>
       <Input value={name} onChange={(e) => setName(e.target.value)} label="Nombre" placeholder="Agrega un nombre para el módulo" />
-
-      <Form.Row>
-        <Picker onChange={setImage} label="Imagen" placeholder="Imagen de módulo" />
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el módulo" />
-      </Form.Row>
 
       {modules.length > 0 && (
         <Form.Row>
@@ -64,6 +60,13 @@ export const CreateModule = ({ course_id, onSubmit }) => {
           </Select>
         </Form.Row>
       )}
+
+      <Textarea value={description} onChange={(e) => setDescription(e.target.value)} label="Descripción" placeholder="Agrega una descripción para el módulo" />
+
+      <Form.Row className="flex justify-center items-center">
+        <Picker className="flex-1" onChange={setImage} label="Imagen" placeholder="Imagen de módulo" />
+        <Picker className="flex-1" onChange={setBackground} label="Fondo" placeholder="Fondo de módulo" />
+      </Form.Row>
     </Form>
   );
 };
