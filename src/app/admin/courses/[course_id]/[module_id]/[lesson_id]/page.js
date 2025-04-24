@@ -12,15 +12,15 @@ export default function Page() {
   const pathname = usePathname();
   const params = useParams();
   const drawers = useDrawers();
-  const [lessons, setLessons] = useState([]);
+  const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Usamos useCallback para memorizar la función 'get'
   const get = useCallback(
     async ({ search = '' } = {}) => {
       setIsLoading(true);
-      const response = await services.lessons.index({ params: { limit: 100, search, sort: [{ order: 'asc' }], module_id: params.module_id } });
-      if (response?.data) setLessons(response?.data);
+      const response = await services.resources.index({ params: { limit: 100, search, module_id: params.module_id } });
+      if (response?.data) setResources(response?.data);
       setIsLoading(false);
     },
     [params.module_id], // Dependemos de params.module_id para que se ejecute correctamente cuando cambie
@@ -66,16 +66,16 @@ export default function Page() {
         }
         isLoading={isLoading}
         onSearch={get}
-        onCreate={() => drawers.create_lesson({ module_id: params.module_id, onSubmit: get })}
+        onCreate={() => drawers.create_resource({ lesson_id: params.lesson_id, onSubmit: get })}
       >
-        {lessons.map((lesson) => {
+        {resources.map((resource) => {
           return (
             <Item
-              key={lesson.id} // Usamos 'lesson.id' como clave única
-              src={lesson.image}
-              title={lesson.name}
-              description={lesson.description}
-              onPress={() => drawers.edit_lesson({ id: lesson.id, onSubmit: get })}
+              key={resource.id} // Usamos 'resource.id' como clave única
+              src={resource.image}
+              title={resource.name}
+              description={resource.description}
+              onPress={() => drawers.edit_resource({ id: resource.id, onSubmit: get })}
             />
           );
         })}

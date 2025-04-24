@@ -35,7 +35,7 @@ export const EditLesson = ({ id, onSubmit }) => {
   };
 
   const get_lessons = async (module_id) => {
-    const response = await services.lessons.index({ limit: 100, module_id, sort: [{ order: 'asc' }] });
+    const response = await services.lessons.index({ params: { limit: 100, module_id, sort: [{ order: 'asc' }] } });
     if (response?.data) setLessons(response?.data);
   };
 

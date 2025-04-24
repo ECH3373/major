@@ -3,7 +3,7 @@
 import { Grid, Item } from '@/components';
 import { useDrawers } from '@/hooks';
 import { services } from '@/services';
-import { Screen } from '@/ui';
+import { Breadcrumb, Screen } from '@/ui';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -33,7 +33,25 @@ export default function Page() {
 
   return (
     <Screen>
-      <Grid title="Módulos" isLoading={isLoading} onSearch={get} onCreate={() => drawers.create_course({ onSubmit: get })}>
+      <Grid
+        navigate={
+          <Breadcrumb>
+            {[
+              {
+                name: 'Eventos',
+                press: () => {
+                  const newPathname = pathname.split('/').slice(0, -1).join('/');
+                  router.push(newPathname);
+                },
+              },
+              { name: 'Módulos', is_active: true },
+            ]}
+          </Breadcrumb>
+        }
+        isLoading={isLoading}
+        onSearch={get}
+        onCreate={() => drawers.create_course({ onSubmit: get })}
+      >
         {modules.map((module, index) => {
           let isLocked = false;
           return <Item key={index} src={module?.image} title={module?.name} description={module?.description} isLocked={isLocked} onPress={() => router.push(`${pathname}/${module.id}`)} />;
