@@ -25,7 +25,6 @@ const store = async ({ name, description, image, module_id, file, duration_secon
       });
 
       image = hub?.data?.data?.url;
-      console.log(image);
     }
   } catch (error) {}
 
@@ -53,7 +52,6 @@ const update = async ({ id, name, description, image, file, duration_seconds, or
       });
 
       image = hub?.data?.data?.url;
-      console.log(hub);
     }
   } catch (error) {}
 

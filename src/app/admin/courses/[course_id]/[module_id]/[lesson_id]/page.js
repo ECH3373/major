@@ -19,11 +19,11 @@ export default function Page() {
   const get = useCallback(
     async ({ search = '' } = {}) => {
       setIsLoading(true);
-      const response = await services.resources.index({ params: { limit: 100, search, module_id: params.module_id } });
+      const response = await services.resources.index({ params: { limit: 100, search, lesson_id: params.lesson_id } });
       if (response?.data) setResources(response?.data);
       setIsLoading(false);
     },
-    [params.module_id], // Dependemos de params.module_id para que se ejecute correctamente cuando cambie
+    [params.lesson_id], // Dependemos de params.lesson_id para que se ejecute correctamente cuando cambie
   );
 
   useEffect(() => {

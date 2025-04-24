@@ -12,6 +12,7 @@ export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
   const drawers = useDrawers();
+  const [course, setCourse] = useState([]);
   const [modules, setModules] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +21,7 @@ export default function Page() {
     const course = await services.courses.show({ id: params.course_id });
 
     if (course?.data) {
+      setCourse(course?.data);
       const modules = await services.modules.index({ params: { course_id: course.data.id, sort: [{ order: 'asc' }] } });
       if (modules?.data) setModules(modules.data);
     }
@@ -32,7 +34,12 @@ export default function Page() {
   }, [get]);
 
   return (
-    <Screen>
+    <Screen
+      className="screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${course?.background})`,
+      }}
+    >
       <Grid
         navigate={
           <Breadcrumb>

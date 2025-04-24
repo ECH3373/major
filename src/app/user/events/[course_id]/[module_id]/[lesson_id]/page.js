@@ -14,12 +14,11 @@ export default function Page() {
   // Definimos la función 'get' dentro de useEffect
   const get = useCallback(async () => {
     const response = await services.lessons.show({ id: params.lesson_id });
-    console.log(response);
 
     if (response?.data) {
       setLesson(response?.data);
       // Llamamos a 'wait' pasando los segundos después de cargar la lección
-      //wait(response?.data?.duration_seconds);
+      wait(response?.data?.duration_seconds);
     }
   }, [params.module_id]);
 

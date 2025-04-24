@@ -11,8 +11,8 @@ export const Item = ({ className = '', onPress, title, description, src, tags = 
       </header>
 
       <main className="flex flex-col gap-1 flex-1 px-2">
-        <h3 className="text-xl font-bold text-center">{title}</h3>
-        <p className="text-sm text-center">{description}</p>
+        <h3 className="text-xl font-bold text-center capitalize">{title}</h3>
+        <p className="text-sm text-center capitalize">{description}</p>
       </main>
 
       <footer className="flex flex-col gap-2 px-2">

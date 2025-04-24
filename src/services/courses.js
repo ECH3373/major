@@ -14,7 +14,7 @@ const show = async ({ id }) => {
   return response;
 };
 
-const store = async ({ name, description, image } = {}) => {
+const store = async ({ name, description, image, background, book } = {}) => {
   try {
     if (name && image) {
       const formData = new FormData();
@@ -25,6 +25,19 @@ const store = async ({ name, description, image } = {}) => {
       });
 
       image = hub?.data?.data?.url;
+    }
+  } catch (error) {}
+
+  try {
+    if (name && background) {
+      const formData = new FormData();
+      formData.append('file', background);
+
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      background = hub?.data?.data?.url;
     }
   } catch (error) {}
 
@@ -32,12 +45,14 @@ const store = async ({ name, description, image } = {}) => {
     name,
     description,
     image,
+    background,
+    book,
   });
 
   return response;
 };
 
-const update = async ({ id, name, description, image } = {}) => {
+const update = async ({ id, name, description, image, background, book } = {}) => {
   try {
     if (name && image) {
       const formData = new FormData();
@@ -51,10 +66,25 @@ const update = async ({ id, name, description, image } = {}) => {
     }
   } catch (error) {}
 
+  try {
+    if (name && background) {
+      const formData = new FormData();
+      formData.append('file', background);
+
+      const hub = await axios.post(`${config.api.hub}/hub`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      background = hub?.data?.data?.url;
+    }
+  } catch (error) {}
+
   const response = await interceptors.gateway.patch(`${config.api.gateway}/courses/courses/${id}`, {
     name,
     description,
     image,
+    background,
+    book,
   });
 
   return response;
