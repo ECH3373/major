@@ -19,7 +19,7 @@ const store = async ({ name, description, image, lesson_id, quantity } = {}) => 
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await interceptors.gateway.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -44,7 +44,7 @@ const update = async ({ id, name, description, image, quantity } = {}) => {
       const formData = new FormData();
       formData.append('file', image);
 
-      const hub = await interceptors.gateway.post(`${config.api.gateway}/hub`, formData, {
+      const hub = await interceptors.gateway.post(`${config.api.hub}/hub`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

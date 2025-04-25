@@ -21,7 +21,26 @@ export default function Page() {
 
     if (me?.data?.employee?.id) {
       const response = await services.enrollments.index({ params: { limit: 100, search, employee_id: me?.data?.employee?.id } });
-      if (response?.data) setEnrollments(response?.data);
+
+      if (response?.data) {
+        const events = await Promise.all(
+          response.data.map(async (event) => {
+            console.log(event.event);
+
+            try {
+              const cour = await services.courses.show({ id: event.event.course_id });
+              return {
+                ...event,
+                course: cour?.data ?? null,
+              };
+            } catch {
+              return { ...event, course: null };
+            }
+          }),
+        );
+
+        setEnrollments(events);
+      }
     }
 
     setIsLoading(false);
@@ -39,6 +58,7 @@ export default function Page() {
             <Item
               key={index}
               title={enrollment?.event?.name}
+              src={enrollment.course.image}
               description={`${enrollment?.event?.start_date} - ${enrollment?.event?.end_date}`}
               onPress={() => router.push(`${pathname}/${enrollment?.event?.course_id}`)}
             />
