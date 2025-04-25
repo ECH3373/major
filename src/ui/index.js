@@ -10,6 +10,7 @@ import { Event } from './Event/Event';
 import { Input } from './Input/Input';
 import { InputDate } from './InputDate/InputDate';
 import { InputNumber } from './InputNumber/InputNumber';
+import { Modal } from './Modal/Modal';
 import { Navbar } from './Navbar/Navbar';
 import { Picker } from './Picker/Picker';
 import { Progress } from './Progress/Progress';
@@ -35,6 +36,7 @@ export {
   Input,
   InputDate,
   InputNumber,
+  Modal,
   Navbar,
   Picker,
   Progress,

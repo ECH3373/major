@@ -1,4 +1,4 @@
-import { useDrawer } from '@/context';
+import { useDrawer, useSwal } from '@/context';
 import { Delete, Folder } from '@/icons';
 import { services } from '@/services';
 import { CreateCourse, CreateEnrollment, CreateEvent, CreateLesson, CreateModule, CreateProduct, CreateResource, EditCourse, EditLesson, EditModule } from '@/templates';
@@ -11,6 +11,7 @@ export const useDrawers = () => {
   const router = useRouter();
   const pathname = usePathname();
   const drawer = useDrawer();
+  const swal = useSwal();
 
   const create_course = ({ onSubmit }) => {
     const handleSubmit = async (response) => {
@@ -25,6 +26,17 @@ export const useDrawers = () => {
     const handleSubmit = async (response) => {
       drawer.close();
       if (onSubmit) await onSubmit(response);
+    };
+
+    const handleConfirmDestroy = () => {
+      swal.fire({
+        title: 'Confirmar',
+        content: '¿Estás seguro que deseas eliminar este curso?',
+        showCancelButton: true,
+        confirmText: 'Sí, eliminar',
+        cancelText: 'No, cancelar',
+        onConfirm: () => handleDestroy,
+      });
     };
 
     const handleDestroy = async () => {
@@ -48,7 +60,7 @@ export const useDrawers = () => {
       content: <EditCourse id={id} onSubmit={handleSubmit} />,
       footer: (
         <div className="flex gap-2">
-          <Button onPress={handleDestroy} startContent={<Delete />} isIconOnly color="danger" />
+          <Button onPress={() => handleConfirmDestroy()} startContent={<Delete />} isIconOnly color="danger" />
           <Button onPress={handleNavigate} startContent={<Folder />} isIconOnly />
         </div>
       ),
@@ -68,6 +80,17 @@ export const useDrawers = () => {
     const handleSubmit = async (response) => {
       drawer.close();
       if (onSubmit) await onSubmit(response);
+    };
+
+    const handleConfirmDestroy = () => {
+      swal.fire({
+        title: 'Confirmar',
+        content: '¿Estás seguro que deseas eliminar este módulo?',
+        showCancelButton: true,
+        confirmText: 'Sí, eliminar',
+        cancelText: 'No, cancelar',
+        onConfirm: () => handleDestroy,
+      });
     };
 
     const handleDestroy = async () => {
@@ -91,7 +114,7 @@ export const useDrawers = () => {
       content: <EditModule id={id} onSubmit={handleSubmit} />,
       footer: (
         <div className="flex gap-2">
-          <Button onPress={handleDestroy} startContent={<Delete />} isIconOnly color="danger" />
+          <Button onPress={() => handleConfirmDestroy()} startContent={<Delete />} isIconOnly color="danger" />
           <Button onPress={handleNavigate} startContent={<Folder />} isIconOnly />
         </div>
       ),
@@ -111,6 +134,17 @@ export const useDrawers = () => {
     const handleSubmit = async (response) => {
       drawer.close();
       if (onSubmit) await onSubmit(response);
+    };
+
+    const handleConfirmDestroy = () => {
+      swal.fire({
+        title: 'Confirmar',
+        content: '¿Estás seguro que deseas eliminar esta lección?',
+        showCancelButton: true,
+        confirmText: 'Sí, eliminar',
+        cancelText: 'No, cancelar',
+        onConfirm: () => handleDestroy,
+      });
     };
 
     const handleDestroy = async () => {
@@ -134,7 +168,7 @@ export const useDrawers = () => {
       content: <EditLesson id={id} onSubmit={handleSubmit} />,
       footer: (
         <div className="flex gap-2">
-          <Button onPress={handleDestroy} startContent={<Delete />} isIconOnly color="danger" />
+          <Button onPress={() => handleConfirmDestroy()} startContent={<Delete />} isIconOnly color="danger" />
           <Button onPress={handleNavigate} startContent={<Folder />} isIconOnly />
         </div>
       ),
@@ -156,6 +190,17 @@ export const useDrawers = () => {
       if (onSubmit) await onSubmit(response);
     };
 
+    const handleConfirmDestroy = () => {
+      swal.fire({
+        title: 'Confirmar',
+        content: '¿Estás seguro que deseas eliminar esta lección?',
+        showCancelButton: true,
+        confirmText: 'Sí, eliminar',
+        cancelText: 'No, cancelar',
+        onConfirm: () => handleDestroy,
+      });
+    };
+
     const handleDestroy = async () => {
       const response = await services.resources.destroy({ id });
 
@@ -172,7 +217,7 @@ export const useDrawers = () => {
       content: <EditResource id={id} onSubmit={handleSubmit} />,
       footer: (
         <div className="flex gap-2">
-          <Button onPress={handleDestroy} startContent={<Delete />} isIconOnly color="danger" />
+          <Button onPress={() => handleConfirmDestroy()} startContent={<Delete />} isIconOnly color="danger" />
         </div>
       ),
     });
