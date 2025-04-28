@@ -1,7 +1,8 @@
 'use client';
 
+import { useSwal } from '@/context';
 import { useDrawers } from '@/hooks';
-import { Folder } from '@/icons';
+import { Delete, Folder } from '@/icons';
 import { services } from '@/services';
 import { Button, Screen, Table, User } from '@/ui';
 import { usePathname, useRouter } from 'next/navigation';
@@ -11,6 +12,7 @@ export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
   const drawers = useDrawers();
+  const swal = useSwal();
   const [events, setEvents] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, pages: 1 });
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +25,33 @@ export default function Page() {
     if (response?.meta?.pagination) setPagination(response?.meta?.pagination);
     setIsLoading(false);
   }, []);
+
+  const handleConfirmDestroy = (id) => {
+    swal.fire({
+      title: 'Confirmar',
+      content: '¿Estás seguro que deseas eliminar este evento?',
+      showCancelButton: true,
+      confirmText: 'Sí, eliminar',
+      cancelText: 'No, cancelar',
+      onConfirm: () => {
+        console.log(444);
+        handleDestroy();
+      },
+    });
+  };
+
+  const handleDestroy = async (id) => {
+    console.log(123123);
+    //const response = await services.events.destroy({ id });
+    //
+    //if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
+    //
+    //if (response?.status == 'success') {
+    //  addToast({ title: 'Success', description: response?.message, color: 'success' });
+    //  drawer.close();
+    //  if (onSubmit) await onSubmit(response);
+    //}
+  };
 
   useEffect(() => {
     get();
@@ -52,8 +81,9 @@ export default function Page() {
 
             <User key={'trainer'} src={event?.trainer?.avatar} name={event?.trainer?.name} />,
 
-            <div key={'action'}>
+            <div key={'action'} className="flex gap-2">
               <Button onPress={() => router.push(`${pathname}/${event.id}`)} startContent={<Folder />} isIconOnly />
+              <Button onPress={handleConfirmDestroy} startContent={<Delete />} isIconOnly color="danger" />
             </div>,
           ];
         })}

@@ -52,7 +52,7 @@ export const SwalProvider = ({ children }) => {
         onCancel={onCancel}
         confirmText={confirmText}
         cancelText={cancelText}
-        showConfirmButton={showConfirmButton}
+        //showConfirmButton={showConfirmButton}
         showCancelButton={showCancelButton}
       />
     </SwalContext.Provider>
