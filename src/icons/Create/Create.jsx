@@ -1,9 +1,9 @@
 import React from 'react';
 import { TiPlus } from 'react-icons/ti';
 
-export const Create = () => {
+export const Create = ({ className = '', onPress }) => {
   return (
-    <div>
+    <div className={className} onClick={onPress}>
       <TiPlus />
     </div>
   );

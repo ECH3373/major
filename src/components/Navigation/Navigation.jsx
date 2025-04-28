@@ -28,13 +28,13 @@ export const Navigation = ({ items = [] }) => {
 
   const logo = (
     <div onClick={() => router.push('/')} className="flex justify-center items-center gap-1 cursor-pointer">
-      <img src={config.image.logo} className="h-16" />
-      <p className="font-bold">MAESTRO JOYERO ORFEBRE</p>
+      <img src={config.image.logo} className="h-10" />
+      <p className="font-bold text-sm">MAESTRO JOYERO ORFEBRE</p>
     </div>
   );
 
   const avatar = (
-    <Dropdown trigger={<Avatar src={employee?.avatar} isBordered />}>
+    <Dropdown trigger={<Avatar src={employee?.avatar} isBordered size='sm' />}>
       <p>Hola, {employee?.name?.split(' ').slice(-1)[0]}</p>
 
       <p onClick={logout} className="text-danger">

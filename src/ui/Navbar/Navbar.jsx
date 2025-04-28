@@ -4,7 +4,7 @@ import React from 'react';
 
 export const Navbar = ({ items = [], logo, avatar }) => {
   return (
-    <NavbarHUI>
+    <NavbarHUI className='h-[50px]'>
       <NavbarBrand>{logo}</NavbarBrand>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -12,7 +12,6 @@ export const Navbar = ({ items = [], logo, avatar }) => {
           <NavbarItem key={index}>
             <Link href={item.link} color="foreground" className="flex flex-col justify-center items-center">
               <div className="text-2xl">{item.icon}</div>
-              <p className="text-tiny">{item.name}</p>
             </Link>
           </NavbarItem>
         ))}

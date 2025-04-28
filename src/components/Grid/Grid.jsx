@@ -5,15 +5,17 @@ import React from 'react';
 export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoading = false }) => {
   return (
     <div className="flex flex-col gap-4">
-      <Card className="flex flex-row justify-between items-center p-4">
+      <Card className="flex flex-row justify-between items-center px-4  h-12">
         <div>
           <h3 className="text-4xl font-bold">{title}</h3>
           {navigate}
         </div>
 
-        <div className="flex items-center gap-2">
-          <Search onSubmit={(search) => onSearch({ search })} />
-          {onCreate && <Button onPress={onCreate} startContent={<Create />} isIconOnly />}
+        <div className="flex items-center gap-2  justify-center">
+          <div className='flex justify-end items-start'>
+            <Search onSubmit={(search) => onSearch({ search })} />
+          </div>
+          {onCreate && <Create onPress={onCreate} className='bg-secondary h-7 w-7 rounded-lg cursor-pointer flex justify-center items-center text-center' />}
         </div>
       </Card>
 
