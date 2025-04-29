@@ -36,6 +36,7 @@ export default function Page() {
       }}
     >
       <Grid
+        minWidth='280px'
         navigate={
           <Breadcrumb>
             {[

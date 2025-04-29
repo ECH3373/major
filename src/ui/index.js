@@ -1,5 +1,6 @@
 import { Autocomplete } from './Autocomplete/Autocomplete';
 import { Avatar } from './Avatar/Avatar';
+import { Book } from './Book/Book';
 import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Button } from './Button/Button';
 import { Card } from './Card/Card';
@@ -26,6 +27,7 @@ import { User } from './User/User';
 export {
   Autocomplete,
   Avatar,
+  Book,
   Breadcrumb,
   Button,
   Card,

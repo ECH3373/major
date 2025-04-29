@@ -2,7 +2,11 @@ import { Create } from '@/icons';
 import { Button, Card, Search, Spinner } from '@/ui';
 import React from 'react';
 
-export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoading = false }) => {
+export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoading = false, minWidth = '320px' }) => {
+  const styles = {
+    gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}, 1fr))`,
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <Card className="flex flex-row justify-between items-center px-4  h-12">
@@ -19,7 +23,7 @@ export const Grid = ({ children, title = '', navigate, onSearch, onCreate, isLoa
         </div>
       </Card>
 
-      {!isLoading && children.length > 0 && <main className={`w-full grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4`}>{children}</main>}
+      {!isLoading && children.length > 0 && <main className={`w-full grid gap-2`} style={styles}>{children}</main>}
 
       {!isLoading && children.length <= 0 && (
         <main>
