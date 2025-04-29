@@ -3,6 +3,16 @@ import '@/styles/index.css';
 import { HeroUIProvider } from '@heroui/react';
 import { ToastProvider } from '@heroui/toast';
 
+export const metadata = {
+  title: "MAJOR",
+  manifest: "/manifest.json",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.pngg',
+  }
+}
+
 export default function Layout({ children }) {
   return (
     <HeroUIProvider>

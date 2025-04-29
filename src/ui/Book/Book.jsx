@@ -9,7 +9,7 @@ export const Book = ({ className = '', src }) => {
 
   return (
     <>
-      {isOpen && <iframe src={src} className='fixed h-full w-full top-0 left-0' />}
+      {isOpen && <iframe src={src} className='fixed screen w-full bottom-0 left-0' />}
 
       <Button onPress={() => setIsOpen(!isOpen)} isIconOnly className={`${className} h-[60px] w-[60px] bg-secondary rounded-full flex justify-center items-center`}>
         <Icon />
