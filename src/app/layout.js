@@ -13,17 +13,19 @@ export const metadata = {
   }
 }
 
-export default function Layout({ children }) {
+export default function RootLayout({ children }) {
   return (
-    <HeroUIProvider>
-      <DrawerProvider>
-        <SwalProvider>
-          <ToastProvider toastProps={{ timeout: 3000 }} />
-          <html lang="es" className="dark">
-            <body>{children}</body>
-          </html>
-        </SwalProvider>
-      </DrawerProvider>
-    </HeroUIProvider>
+    <html lang="es" className="dark">
+      <body>
+        <HeroUIProvider>
+          <DrawerProvider>
+            <SwalProvider>
+              <ToastProvider toastProps={{ timeout: 3000 }} />
+              {children}
+            </SwalProvider>
+          </DrawerProvider>
+        </HeroUIProvider>
+      </body>
+    </html>
   );
 }
