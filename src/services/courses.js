@@ -26,7 +26,7 @@ const store = async ({ name, description, image, background, book } = {}) => {
 
       image = hub?.data?.data?.url;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   try {
     if (name && background) {
@@ -39,7 +39,7 @@ const store = async ({ name, description, image, background, book } = {}) => {
 
       background = hub?.data?.data?.url;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   const response = await interceptors.gateway.post(`${config.api.gateway}/courses/courses`, {
     name,
@@ -53,6 +53,7 @@ const store = async ({ name, description, image, background, book } = {}) => {
 };
 
 const update = async ({ id, name, description, image, background, book } = {}) => {
+  console.log(123123123)
   try {
     if (name && image) {
       const formData = new FormData();
@@ -62,9 +63,10 @@ const update = async ({ id, name, description, image, background, book } = {}) =
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
+      console.log(hub)
       image = hub?.data?.data?.url;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   try {
     if (name && background) {
@@ -77,7 +79,7 @@ const update = async ({ id, name, description, image, background, book } = {}) =
 
       background = hub?.data?.data?.url;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   const response = await interceptors.gateway.patch(`${config.api.gateway}/courses/courses/${id}`, {
     name,
