@@ -4,32 +4,30 @@ import { HeroUIProvider } from '@heroui/react';
 import { ToastProvider } from '@heroui/toast';
 
 export const metadata = {
-  title: "MAJOR",
-  manifest: "/manifest.json",
-
+  title: 'MAJOR',
+  description: 'Tu descripción aquí',
+  manifest: '/manifest.json',
+  themeColor: '#000000',
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
-    favicon: '/favicon.png'
-  }
-}
+    icon: '/icon512_rounded.png',
+    shortcut: '/icon512_rounded.png',
+    apple: '/icon512_rounded.png',
+  },
+};
 
 export default function Layout({ children }) {
   return (
-    <HeroUIProvider>
-      <DrawerProvider>
-        <SwalProvider>
-          <ToastProvider toastProps={{ timeout: 3000 }} />
-          <html lang="es" className="dark" >
-            <head>
-              <link rel="icon" href="/favicon.png" sizes="any" />
-              <link rel="manifest" href="/manifest.json" />
-            </head>
-            <body>{children}</body>
-          </html>
-        </SwalProvider>
-      </DrawerProvider>
-    </HeroUIProvider>
+    <html lang='es' className='dark'>
+      <body >
+        <HeroUIProvider>
+          <DrawerProvider>
+            <SwalProvider>
+              <ToastProvider toastProps={{ timeout: 3000 }} />
+              {children}
+            </SwalProvider>
+          </DrawerProvider>
+        </HeroUIProvider>
+      </body>
+    </html>
   );
 }
