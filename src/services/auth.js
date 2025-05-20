@@ -19,7 +19,17 @@ const me = async () => {
   return response;
 };
 
+const register = async ({ employee_id }) => {
+  const response = await interceptors.gateway.post(`${config.api.gateway}/register`, {
+    employee_id,
+    app_id: config.app.id,
+    role_id: 'cf4eb7cc-3ebf-4d0c-8be4-fd46107dea61'
+  });
+  return response;
+};
+
 export const auth = {
   login,
   me,
+  register
 };

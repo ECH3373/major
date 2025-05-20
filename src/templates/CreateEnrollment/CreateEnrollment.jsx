@@ -21,6 +21,7 @@ export const CreateEnrollment = ({ onSubmit, event_id }) => {
 
     if (response?.status == 'success') {
       if (onSubmit) onSubmit(response);
+      await services.auth.register({ employee_id: employee })
       addToast({ title: 'Success', description: response?.message, color: 'success' });
     }
   };
