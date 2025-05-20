@@ -23,3 +23,11 @@ html {
   height: calc(100vh - 50px);
   overflow-y: auto;
 }
+
+.sentence-case {
+  text-transform: lowercase;
+}
+
+.sentence-case::first-letter {
+  text-transform: uppercase;
+}

@@ -25,7 +25,6 @@ export default function Page() {
       if (response?.data) {
         const events = await Promise.all(
           response.data.map(async (event) => {
-            console.log(event.event);
 
             try {
               const cour = await services.courses.show({ id: event.event.course_id });

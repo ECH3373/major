@@ -1,11 +1,14 @@
 'use client';
 
-import { Grid } from '@/components';
+import { Grid, Item } from '@/components';
 import { services } from '@/services';
 import { Event, Screen } from '@/ui';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [events, setEvents] = useState([]);
 
   const getEvents = async () => {
@@ -20,9 +23,7 @@ export default function Page() {
           params: { event_id: event.id },
         });
 
-        const trainer = await services.employees.show({ id: event.trainer_id })
         event.enrollments = enrollments.data;
-        event.trainer = trainer.data
       }
 
       setEvents(data);
@@ -37,7 +38,7 @@ export default function Page() {
     <Screen>
       <Grid title="Eventos en curso">
         {events.map((event) => (
-          <Event key={event.id} data={event} />
+          <Item key={event.id} title={event.name} src={event?.image} onPress={() => router.push(`${pathname}/${event.id}`)} />
         ))}
       </Grid>
     </Screen>

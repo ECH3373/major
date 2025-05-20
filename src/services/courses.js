@@ -53,7 +53,6 @@ const store = async ({ name, description, image, background, book } = {}) => {
 };
 
 const update = async ({ id, name, description, image, background, book } = {}) => {
-  console.log(123123123)
   try {
     if (name && image) {
       const formData = new FormData();
@@ -63,7 +62,6 @@ const update = async ({ id, name, description, image, background, book } = {}) =
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      console.log(hub)
       image = hub?.data?.data?.url;
     }
   } catch (error) { }

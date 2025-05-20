@@ -5,6 +5,7 @@ import { useDrawers } from '@/hooks';
 import { Delete, Folder } from '@/icons';
 import { services } from '@/services';
 import { Button, Screen, Table, User } from '@/ui';
+import { addToast } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -27,30 +28,32 @@ export default function Page() {
   }, []);
 
   const handleConfirmDestroy = (id) => {
+    const event = () => {
+      handleDestroy(id)
+    }
+
     swal.fire({
       title: 'Confirmar',
       content: '¿Estás seguro que deseas eliminar este evento?',
       showCancelButton: true,
       confirmText: 'Sí, eliminar',
       cancelText: 'No, cancelar',
-      onConfirm: () => {
-        console.log(444);
-        handleDestroy();
-      },
+      onConfirm: () => event,
+      //onConfirm: () => {
+      //  handleDestroy();
+      //},
     });
   };
 
   const handleDestroy = async (id) => {
-    console.log(123123);
-    //const response = await services.events.destroy({ id });
-    //
-    //if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
-    //
-    //if (response?.status == 'success') {
-    //  addToast({ title: 'Success', description: response?.message, color: 'success' });
-    //  drawer.close();
-    //  if (onSubmit) await onSubmit(response);
-    //}
+    const response = await services.events.destroy({ id });
+
+    if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
+
+    if (response?.status == 'success') {
+      addToast({ title: 'Success', description: response?.message, color: 'success' });
+      await get()
+    }
   };
 
   useEffect(() => {
@@ -83,7 +86,7 @@ export default function Page() {
 
             <div key={'action'} className="flex gap-2">
               <Button onPress={() => router.push(`${pathname}/${event.id}`)} startContent={<Folder />} isIconOnly />
-              <Button onPress={handleConfirmDestroy} startContent={<Delete />} isIconOnly color="danger" />
+              <Button onPress={() => handleConfirmDestroy(event.id)} startContent={<Delete />} isIconOnly color="danger" />
             </div>,
           ];
         })}

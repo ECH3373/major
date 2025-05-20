@@ -8,8 +8,9 @@ import { Delete } from './Delete/Delete';
 import { Folder } from './Folder/Folder';
 import { Home } from './Home/Home';
 import { Lock } from './Lock/Lock';
+import { Ring } from './Ring/Ring';
 import { Search } from './Search/Search';
 import { Store } from './Store/Store';
 import { User } from './User/User';
 
-export { Book, Calendar, Cart, Clock, Close, Create, Delete, Folder, Home, Lock, Search, Store, User };
+export { Book, Calendar, Cart, Clock, Close, Create, Delete, Folder, Home, Lock, Ring, Search, Store, User };

@@ -35,7 +35,7 @@ export const Navigation = ({ items = [] }) => {
 
   const avatar = (
     <Dropdown trigger={<Avatar src={employee?.avatar} isBordered size='sm' />}>
-      <p>Hola, {employee?.name?.split(' ').slice(-1)[0]}</p>
+      <div><p className='capitalize'>Hola, {employee?.name?.split(' ').slice(-1)[0]}</p></div>
 
       <p onClick={logout} className="text-danger">
         Cerrar sesión

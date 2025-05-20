@@ -1,5 +1,5 @@
 import { Navigation } from '@/components';
-import { Home, Store } from '@/icons';
+import { Home, Ring, Store } from '@/icons';
 
 export default function Layout({ children }) {
   return (
@@ -7,7 +7,7 @@ export default function Layout({ children }) {
       <Navigation
         items={[
           { link: '/trainer/', name: 'Inicio', icon: <Home /> },
-          //{ link: '/trainer/store', name: 'Tienda', icon: <Store /> },
+          { link: '/trainer/quality/', name: 'Calificar', icon: <Ring /> },
         ]}
       />
       {children}
