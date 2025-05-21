@@ -1,7 +1,7 @@
 import { useDrawer, useSwal } from '@/context';
 import { Delete, Folder } from '@/icons';
 import { services } from '@/services';
-import { CreateCourse, CreateEnrollment, CreateEvent, CreateLesson, CreateModule, CreateProduct, CreateResource, EditCourse, EditLesson, EditModule } from '@/templates';
+import { CreateCourse, CreateEnrollment, CreateEvent, CreateImageLogin, CreateLesson, CreateModule, CreateProduct, CreateResource, EditCourse, EditLesson, EditModule } from '@/templates';
 import { EditResource } from '@/templates/EditResource/EditResource';
 import { Button } from '@/ui';
 import { addToast } from '@heroui/react';
@@ -250,5 +250,14 @@ export const useDrawers = () => {
     drawer.fire({ content: <CreateProduct onSubmit={handleSubmit} /> });
   };
 
-  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment, create_event, create_product };
+  const create_image_login = ({ onSubmit }) => {
+    const handleSubmit = async (response) => {
+      drawer.close();
+      if (onSubmit) await onSubmit(response);
+    };
+
+    drawer.fire({ content: <CreateImageLogin onSubmit={handleSubmit} /> });
+  };
+
+  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment, create_event, create_product, create_image_login };
 };

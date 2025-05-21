@@ -5,6 +5,7 @@ import { Breadcrumb } from './Breadcrumb/Breadcrumb';
 import { Button } from './Button/Button';
 import { Card } from './Card/Card';
 import { Divider } from './Divider/Divider';
+import { Dot } from './Dot/Dot';
 import { Drawer } from './Drawer/Drawer';
 import { Dropdown } from './Dropdown/Dropdown';
 import { Event } from './Event/Event';
@@ -32,6 +33,7 @@ export {
   Button,
   Card,
   Divider,
+  Dot,
   Drawer,
   Dropdown,
   Event,
