@@ -49,7 +49,7 @@ const update = async ({ image } = {}) => {
     }
   } catch (error) { }
 
-  const response = await interceptors.gateway.patch(`${config.api.gateway}/courses/lessons/${id}`, {
+  const response = await interceptors.gateway.patch(`${config.api.gateway}/major/images/${id}`, {
     url: image
   });
 
@@ -57,7 +57,7 @@ const update = async ({ image } = {}) => {
 };
 
 const destroy = async ({ id } = {}) => {
-  const response = await interceptors.gateway.delete(`${config.api.gateway}/courses/lessons/${id}`);
+  const response = await interceptors.gateway.delete(`${config.api.gateway}/major/images/${id}`);
   return response;
 };
 

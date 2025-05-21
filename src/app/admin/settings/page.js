@@ -23,7 +23,9 @@ export default function Page() {
     <Screen>
       <Grid title='Imágenes de login' onCreate={() => drawers.create_image_login({ onSubmit: get })}>
         {images.map((image) => (
-          <Item key={image.id} src={image.url} />
+          <Item key={image.id} src={image.url}
+            onPress={() => drawers.edit_image_login({ id: image.id, onSubmit: get })}
+          />
         ))}
       </Grid>
     </Screen>

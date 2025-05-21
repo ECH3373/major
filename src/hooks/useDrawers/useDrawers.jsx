@@ -259,5 +259,38 @@ export const useDrawers = () => {
     drawer.fire({ content: <CreateImageLogin onSubmit={handleSubmit} /> });
   };
 
-  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment, create_event, create_product, create_image_login };
+  const edit_image_login = async ({ id, onSubmit }) => {
+    const handleConfirmDestroy = () => {
+      swal.fire({
+        title: 'Confirmar',
+        content: '¿Estás seguro que deseas eliminar esta lección?',
+        showCancelButton: true,
+        confirmText: 'Sí, eliminar',
+        cancelText: 'No, cancelar',
+        onConfirm: () => handleDestroy,
+      });
+    };
+
+    const handleDestroy = async () => {
+      const response = await services.login.destroy({ id });
+
+      if (response?.status == 'error') addToast({ title: 'Error', description: response?.message, color: 'danger' });
+
+      if (response?.status == 'success') {
+        addToast({ title: 'Success', description: response?.message, color: 'success' });
+        drawer.close();
+        if (onSubmit) await onSubmit(response);
+      }
+    };
+
+    drawer.fire({
+      footer: (
+        <div className="flex gap-2">
+          <Button onPress={() => handleConfirmDestroy()} startContent={<Delete />} isIconOnly color="danger" />
+        </div>
+      ),
+    });
+  };
+
+  return { create_course, edit_course, create_module, create_resource, edit_module, create_lesson, edit_lesson, edit_resource, create_enrollment, create_event, create_product, create_image_login, edit_image_login };
 };
