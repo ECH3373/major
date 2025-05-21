@@ -40,7 +40,7 @@ export default function Page() {
         onSubmit={handleSubmit}
         submitText="Iniciar"
         src={image?.url}
-        className="h-[500px] w-[800px]"
+        className="h-[500px] w-[980px]"
       >
         <Input value={username} onChange={(e) => setUsername(e.target.value)} label="Número de empleado" placeholder="Escribe tu número de empleado" autoFocus />
       </Form>

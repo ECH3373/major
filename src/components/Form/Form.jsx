@@ -13,7 +13,7 @@ export const Form = ({ children, className = '', onSubmit, title = '', subtitle 
 
     try {
       if (onSubmit) await onSubmit();
-    } catch (error) {}
+    } catch (error) { }
 
     setIsLoading(false);
   };
@@ -21,7 +21,7 @@ export const Form = ({ children, className = '', onSubmit, title = '', subtitle 
   return (
     <Card className={`flex flex-row w-full container ${className}`}>
       {src && (
-        <div className="flex w-[60%]">
+        <div className="flex w-[70%]">
           <img src={src} className="h-full w-full object-cover opacity-90 fade-right" />
         </div>
       )}
