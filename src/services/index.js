@@ -10,6 +10,7 @@ import { lessons } from './lessons';
 import { login } from './login';
 import { modules } from './modules';
 import { orders } from './order';
+import { pieces } from './pieces';
 import { products } from './products';
 import { progress } from './progress';
 import { resources } from './resources';
@@ -27,6 +28,7 @@ export const services = {
   login,
   modules,
   orders,
+  pieces,
   products,
   progress,
   resources,

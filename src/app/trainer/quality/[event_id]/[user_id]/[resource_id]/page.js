@@ -37,10 +37,14 @@ export default function Page() {
     }
   };
 
-
   useEffect(() => {
     getPiece()
   }, [])
+
+  const save = async () => {
+    const response = await services.pieces.store({ resource_id: params.resource_id, employe_id: params.user_id })
+    console.log(response)
+  }
 
   return (
 
@@ -57,7 +61,7 @@ export default function Page() {
       </div>
 
       <div className="flex">
-        <Button>
+        <Button onPress={save}>
           Guardar cambios
         </Button>
       </div>

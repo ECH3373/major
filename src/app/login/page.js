@@ -35,15 +35,17 @@ export default function Page() {
   return (
     <Screen className="flex justify-center items-center h-full">
       <Form
-        title={`Bienvenido a ${config.app.name}`}
-        subtitle="Por favor, inicia sesión"
+        title={`Bienvenido`}
         onSubmit={handleSubmit}
         submitText="Iniciar"
         src={image?.url}
         className="h-[500px] w-[980px]"
       >
-        <Input value={username} onChange={(e) => setUsername(e.target.value)} label="Número de empleado" placeholder="Escribe tu número de empleado" autoFocus />
+        <img src={config.image.logo_animated} className='h-[60px] absolute bottom-2 right-2' />
+        <Input value={username} onChange={(e) => setUsername(e.target.value)} label="Por favor, inicia sesión" placeholder="Número de empleado" autoFocus />
       </Form>
+
+
     </Screen>
   );
 }

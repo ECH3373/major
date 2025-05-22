@@ -26,7 +26,7 @@ export const Form = ({ children, className = '', onSubmit, title = '', subtitle 
         </div>
       )}
 
-      <div className="flex flex-1 justify-center items-center p-4">
+      <div className="flex flex-1 justify-center items-center p-4 relative">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
           {(title || subtitle) && (
             <header>
