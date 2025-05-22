@@ -6,8 +6,8 @@ export default function Layout({ children }) {
     <div>
       <Navigation
         items={[
-          { link: '/trainer/', name: 'Inicio', icon: <Home /> },
-          { link: '/trainer/quality/', name: 'Calificar', icon: <Ring /> },
+          { link: '/trainer', name: 'Inicio', icon: <Home /> },
+          { link: '/trainer/quality', name: 'Calificar', icon: <Ring /> },
         ]}
       />
       {children}

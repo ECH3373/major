@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     <div>
       <Navigation
         items={[
-          { link: '/user/', name: 'Inicio', icon: <Home /> },
+          { link: '/user', name: 'Inicio', icon: <Home /> },
           { link: '/user/events', name: 'Eventos', icon: <Book /> },
         ]}
       />

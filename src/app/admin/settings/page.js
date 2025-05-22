@@ -11,7 +11,7 @@ export default function Page() {
   const [images, setImages] = useState([])
 
   const get = async () => {
-    const response = await services.login.index({ limit: 100 })
+    const response = await services.login.index({ params: { limit: 100 } })
     setImages(response?.data)
   }
 
