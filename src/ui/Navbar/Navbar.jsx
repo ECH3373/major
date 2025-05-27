@@ -9,6 +9,12 @@ import { Divider } from '..';
 export const Navbar = ({ items = [], logo, avatar }) => {
   const pathname = usePathname()
 
+  const currentRoot = pathname
+    .split('/')
+    .slice(1, 3)      // toma índice 1 y 2
+    .filter(Boolean)  // elimina posibles cadenas vacías
+    .join('/');
+
   return (
     <div className='flex h-[50px] bg-foreground-50/80 px-2'>
       <div className='flex justify-center items-center'>{logo}</div>
@@ -17,17 +23,34 @@ export const Navbar = ({ items = [], logo, avatar }) => {
         <Divider orientation='vertical' />
 
 
-        {items.map((item, index) => (
-          <>
-            <span key={index}>
-              <Link href={item.link} color="foreground" className="flex flex-col justify-center items-center">
-                <div className={`flex justify-center items-center ${pathname == item.link && 'border-b-[2px] border-b-success'}`}>{item.name}</div>
-              </Link>
-            </span>
+        {items.map((item, index) => {
+          // mismo procedimiento para cada item.link
+          const itemRoot = item.link
+            .split('/')
+            .slice(1, 3)
+            .filter(Boolean)
+            .join('/');
 
-            <Divider orientation='vertical' />
-          </>
-        ))}
+          const isActive = currentRoot === itemRoot;
+
+          return (
+            <React.Fragment key={index}>
+              <Link
+                href={item.link}
+                className="flex flex-col justify-center items-center"
+              >
+                <div
+                  className={`flex justify-center items-center
+                    ${isActive ? 'border-b-[2px] border-b-success' : ''}
+                  `}
+                >
+                  {item.name}
+                </div>
+              </Link>
+              <Divider orientation='vertical' />
+            </React.Fragment>
+          );
+        })}
       </div>
 
       <NavbarHUI className='w-[80px] h-[50px] bg-transparent'>

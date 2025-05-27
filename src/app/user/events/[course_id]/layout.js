@@ -1,5 +1,6 @@
 'use client'
 
+import { Dalia } from '@/components';
 import { services } from '@/services';
 import { Book } from '@/ui';
 import { useParams } from 'next/navigation';
@@ -22,6 +23,7 @@ export default function Layout({ children }) {
   return (
     <>
       {children}
+      <Dalia className='fixed bottom-24 right-4' />
       <Book src={course.book} className='fixed bottom-4 right-4' />
     </>
   )

@@ -5,6 +5,7 @@ import { defects } from './defects';
 import { employees } from './employees';
 import { enrollments } from './enrollments';
 import { events } from './events';
+import { gpt } from './gpt';
 import { invoices } from './invoice';
 import { lessons } from './lessons';
 import { login } from './login';
@@ -23,6 +24,7 @@ export const services = {
   employees,
   enrollments,
   events,
+  gpt,
   invoices,
   lessons,
   login,

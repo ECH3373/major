@@ -19,6 +19,7 @@ import { Progress } from './Progress/Progress';
 import { Screen } from './Screen/Screen';
 import { Search } from './Search/Search';
 import { Select } from './Select/Select';
+import { Siri } from './Siri/Siri';
 import { Spinner } from './Spinner/Spinner';
 import { Table } from './Table/Table';
 import { Tabs } from './Tabs/Tabs';
@@ -47,6 +48,7 @@ export {
   Screen,
   Search,
   Select,
+  Siri,
   Spinner,
   Table,
   Tabs,
