@@ -1,6 +1,7 @@
 import { api } from './api';
 import { app } from './app';
 import { image } from './image';
+import { prompt } from './prompt';
 import { role } from './role';
 
 export const config = {
@@ -8,4 +9,5 @@ export const config = {
   app,
   role,
   image,
+  prompt
 };

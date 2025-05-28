@@ -13,7 +13,7 @@ export const Dalia = ({ className }) => {
 
   const reply = async (content) => {
     const response = await services.gpt.chat({
-      prompt: 'tu nombre es D.A.L.I.A, eres un asistente virtual',
+      prompt: config.prompt,
       history,
       role: 'user',
       content
@@ -39,6 +39,15 @@ export const Dalia = ({ className }) => {
   useEffect(() => {
     console.log(transcription.text)
   }, [transcription.text])
+
+  const tts = async () => {
+    const response = await services.gpt.tts({ text: 'hola, soy un asistente virtual' })
+    console.log(response)
+  }
+
+  useEffect(() => {
+    tts()
+  }, [])
 
 
   return (
